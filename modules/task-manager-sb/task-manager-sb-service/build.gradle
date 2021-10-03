@@ -1,0 +1,11 @@
+dependencies {
+	compile project(":modules:task-manager-sb:task-manager-sb-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+}
+
+buildService {
+	apiDir = "../task-manager-sb-api/src/main/java"
+}
+
+group = "net.carlosduran.mimacom.taskmanager.sb"

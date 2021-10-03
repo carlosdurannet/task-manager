@@ -1,0 +1,10 @@
+Bundle-Name: task-manager-sb-api
+Bundle-SymbolicName: net.carlosduran.mimacom.taskmanager.sb.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	net.carlosduran.mimacom.taskmanager.sb.exception,\
+	net.carlosduran.mimacom.taskmanager.sb.model,\
+	net.carlosduran.mimacom.taskmanager.sb.service,\
+	net.carlosduran.mimacom.taskmanager.sb.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../task-manager-sb-service/service.xml

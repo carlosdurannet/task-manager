@@ -1,0 +1,4 @@
+Bundle-Name: task-manager-web
+Bundle-SymbolicName: net.carlosduran.mimacom.taskmanager.web
+Bundle-Version: 1.0.0
+Export-Package: net.carlosduran.mimacom.taskmanager.web.constants
