@@ -7,7 +7,6 @@ import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -15,7 +14,6 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import net.carlosduran.mimacom.taskmanager.sb.model.Task;
 import net.carlosduran.mimacom.taskmanager.sb.service.TaskLocalServiceUtil;
 import net.carlosduran.mimacom.taskmanager.web.constants.TaskManagerPortletKeys;
 
@@ -31,6 +29,7 @@ public class EditTaskActionCommand extends BaseMVCActionCommand {
 	
 	private static final Log _log = LogFactoryUtil.getLog(EditTaskActionCommand.class);
 
+	
 	@Override
 	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		

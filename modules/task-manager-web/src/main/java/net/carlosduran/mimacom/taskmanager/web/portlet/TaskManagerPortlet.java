@@ -1,18 +1,6 @@
 package net.carlosduran.mimacom.taskmanager.web.portlet;
 
-import net.carlosduran.mimacom.taskmanager.sb.model.Task;
-import net.carlosduran.mimacom.taskmanager.sb.service.TaskLocalServiceUtil;
-import net.carlosduran.mimacom.taskmanager.web.constants.TaskManagerPortletKeys;
-
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -20,6 +8,14 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
+
+import net.carlosduran.mimacom.taskmanager.sb.service.TaskLocalServiceUtil;
+import net.carlosduran.mimacom.taskmanager.web.constants.TaskManagerPortletKeys;
 
 /**
  * @author Carlos
