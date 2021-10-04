@@ -28,7 +28,7 @@ List<Task> finishedTasks = (List<Task>)renderRequest.getAttribute("finishedTasks
     		<div class="col">
 				<div class="tools">
 					<a class="btn btn-primary" href="${ addTaskURL }">
-						<liferay-ui:message key="add.task"/>		
+						<liferay-ui:message key="add.new.task"/>		
 					</a>
 				</div>    		
     		</div>
