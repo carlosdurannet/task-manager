@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@page import="com.liferay.portal.kernel.servlet.SessionErrors"%>
 <%@page import="net.carlosduran.mimacom.taskmanager.sb.model.Task"%>
 <%@page import="java.util.List"%>
@@ -17,6 +18,7 @@ List<Task> finishedTasks = (List<Task>)renderRequest.getAttribute("finishedTasks
 %>
 <portlet:renderURL var="addTaskURL">
 	<portlet:param name="mvcRenderCommandName" value="/taskManager/addTask"/>
+	<portlet:param name="backURL" value="${ themeDisplay.URLCurrent }"/>
 </portlet:renderURL>
 
 
@@ -38,7 +40,14 @@ List<Task> finishedTasks = (List<Task>)renderRequest.getAttribute("finishedTasks
 					<liferay-ui:search-container delta="20" emptyResultsMessage="no.pending.tasks" iteratorURL="<%= iteratorURL %>" total="<%= pendingTasks.size() %>">
 					    <liferay-ui:search-container-results  results="<%= ListUtil.subList(pendingTasks, searchContainer.getStart(), searchContainer.getEnd()) %>" />
 					    <liferay-ui:search-container-row className="net.carlosduran.mimacom.taskmanager.sb.model.Task" keyProperty="taskId" modelVar="task">
-					        <liferay-ui:search-container-column-text name="col.task.title" value="${ task.title }" />
+					        <liferay-ui:search-container-column-text name="col.task.title">
+					        	<portlet:renderURL var="editTaskURL">
+					        		<portlet:param name="mvcRenderCommandName" value="/taskManager/editTask"/>
+					        		<portlet:param name="taskId" value="${ task.taskId }"/>
+					        		<portlet:param name="backURL" value="<%= themeDisplay.getURLCurrent() %>"/>
+					        	</portlet:renderURL>
+					        	<a href="${ editTaskURL }">${ task.title }</a>
+					        </liferay-ui:search-container-column-text>
 					        <liferay-ui:search-container-column-text name="col.creation.date">
 					        	<fmt:formatDate type = "both" value = "${ task.createDate }" />
 					        </liferay-ui:search-container-column-text>
@@ -49,7 +58,8 @@ List<Task> finishedTasks = (List<Task>)renderRequest.getAttribute("finishedTasks
 					        	<portlet:actionURL var="changeTaskStatusURL" name="/taskManager/changeTaskStatus">
 					        		<portlet:param name="taskId" value="${ task.taskId }"/>
 					        		<portlet:param name="status" value="2"/>
-					        	</portlet:actionURL>				           	
+					        	</portlet:actionURL>
+					        					           	
 					           	<a class="btn btn-primary" href="${ changeTaskStatusURL }">
 					           		<liferay-ui:message key="action.finish"/>
 					           	</a>					           
@@ -70,7 +80,14 @@ List<Task> finishedTasks = (List<Task>)renderRequest.getAttribute("finishedTasks
 					<liferay-ui:search-container delta="20" emptyResultsMessage="no.finished.tasks" iteratorURL="<%= iteratorURL %>" total="<%= finishedTasks.size() %>">
 					    <liferay-ui:search-container-results  results="<%= ListUtil.subList(finishedTasks, searchContainer.getStart(), searchContainer.getEnd()) %>" />
 					    <liferay-ui:search-container-row className="net.carlosduran.mimacom.taskmanager.sb.model.Task" keyProperty="taskId" modelVar="task">
-					        <liferay-ui:search-container-column-text name="col.task.title" value="${ task.title }" />
+					        <liferay-ui:search-container-column-text name="col.task.title">
+					        	<portlet:renderURL var="editTaskURL">
+					        		<portlet:param name="mvcRenderCommandName" value="/taskManager/editTask"/>
+					        		<portlet:param name="taskId" value="${ task.taskId }"/>
+					        		<portlet:param name="backURL" value="<%= themeDisplay.getURLCurrent() %>"/>
+					        	</portlet:renderURL>
+					        	<a href="${ editTaskURL }">${ task.title }</a>
+					        </liferay-ui:search-container-column-text>
 					        <liferay-ui:search-container-column-text name="col.creation.date">
 					        	<fmt:formatDate type = "both" value = "${ task.createDate }" />
 					        </liferay-ui:search-container-column-text>

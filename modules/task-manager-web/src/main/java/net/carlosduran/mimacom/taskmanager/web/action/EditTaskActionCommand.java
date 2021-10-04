@@ -13,9 +13,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import net.carlosduran.mimacom.taskmanager.sb.model.Task;
 import net.carlosduran.mimacom.taskmanager.sb.service.TaskLocalServiceUtil;
@@ -25,44 +23,31 @@ import net.carlosduran.mimacom.taskmanager.web.constants.TaskManagerPortletKeys;
 		immediate = true,
 		property = {
 			TaskManagerPortletKeys.TASKMANAGER_JAVAX_PORTLET_NAME,
-			TaskManagerPortletKeys.MVC_COMMAND_NAME + "/taskManager/addTask"
+			TaskManagerPortletKeys.MVC_COMMAND_NAME + "/taskManager/editTask"
 		},
 		service = MVCActionCommand.class
 )
-public class AddTaskActionCommand extends BaseMVCActionCommand {
+public class EditTaskActionCommand extends BaseMVCActionCommand {
 	
-	private static final Log _log = LogFactoryUtil.getLog(AddTaskActionCommand.class);
+	private static final Log _log = LogFactoryUtil.getLog(EditTaskActionCommand.class);
 
 	@Override
 	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		
-		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-		var groupId = themeDisplay.getScopeGroupId();		
-		var companyId = themeDisplay.getCompanyId();
-		var userId = themeDisplay.getUserId();
-		var screenName = themeDisplay.getUser().getScreenName();
-		var now = new Date();
-		
+		var now = new Date();		
 		var title = ParamUtil.getString(actionRequest, "title");
 		var description = ParamUtil.getString(actionRequest, "description");		
-		var taskId = CounterLocalServiceUtil.increment(Task.class.getName());
-		var task = TaskLocalServiceUtil.createTask(taskId);
-		
-		task.setCompanyId(companyId);
-		task.setGroupId(groupId);
-		task.setUserId(userId);
-		task.setUserName(screenName);
-		task.setTitle(title);
-		task.setDescription(description);
-		task.setCreateDate(now);
-		task.setModifiedDate(now);
-		task.setStatus(1);
+		var taskId = ParamUtil.getLong(actionRequest, "taskId");
 		
 		try {
-			TaskLocalServiceUtil.addTask(task);
+			var task = TaskLocalServiceUtil.getTask(taskId);
+			
+			task.setTitle(title);
+			task.setDescription(description);
+			task.setModifiedDate(now);
+			TaskLocalServiceUtil.updateTask(task);
 		} catch (Exception e) {
-			SessionErrors.add(actionRequest, "failed-adding-task");
+			SessionErrors.add(actionRequest, "failed-updating-task");
 			_log.error(e);
 		}
 
